@@ -1,0 +1,14 @@
+{
+  "name": "site_meadwlark",
+  "version": "1.0.0",
+  "description": "livro cap 3",
+  "main": "meadowlark.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Murilo S. Gomes",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
