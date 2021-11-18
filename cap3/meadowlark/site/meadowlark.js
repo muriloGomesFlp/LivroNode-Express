@@ -3,10 +3,17 @@ const expressHandlebars = require('express-handlebars')
 
 const app = express()
 
+const biscoito = [
+'msg1',
+'msg2',
+'msg3',
+'msg4'
+]
 /*configurar o view engine Handlebars -> Aqui será determinada algumas configurações, 
 o uso do defaultLayout informa que o arquivo main.handlebars será a nossa página mestre 
 e à partir desta sera injetado o conteúdo do body. Nesse projeto foi configurado o path: 
-views/layouts/main.handlebars
+views/layouts/main.hbs -> estrutura padrão (famoso boilerplate: trechos de código que podem
+    ser reutilizados várias vezes, com ou sem nenhuma modificação)
 */
 
 /*
@@ -32,13 +39,28 @@ app.set('view engine', 'hbs') //deve ser tambem definido a exteção apois o pri
 //Definido a porta atráves de uma variável de ambiente antes da inicialização do servidor
 const port = process.env.PORT || 3000
 
-//Rotas para as páginas -> devem vir sempre em primeiro em relação ao app.use
-/*O roteador de rotas do expresse app.get, realiza alguns tratamentos de formta automática como
+/*
+######################
+Rotas para as páginas
+######################
+O roteador de rotas do expresse app.get, realiza alguns tratamentos de formta automática como
 o tratamento de querystring, ver cap1 req.url para comparar*/
-
 //O view engine define automaticamente o contenType(text/html) e o status padrão(200)
+
 app.get('/', (req, res) => res.render('home'))
-app.get('/about', (req, res) => res.render('about'))
+app.get('/about', (req, res) => {
+    //pega valores aleatorios do array biscoito e atribui a variávrl
+    const randomBiscoitoMsg = biscoito[Math.floor(Math.random()*biscoito.length)]
+    //envia para o front por meio da variável biscoito o valor coletado no random
+    res.render('about', {biscoito: randomBiscoitoMsg})
+})
+
+/*
+###########################
+Definir o middleware static
+###########################
+*/
+app.use(express.static(__dirname + '/public'))
 
 
 //Página 404 personalizada
@@ -49,7 +71,7 @@ app.use((req, res) => {
 
 //Página 505 personalizada
 app.use((err, req, res, next) => {
-    console.erro(err.message)
+    //console.erro(err.message)
     res.status(505)
     res.render('500')
 })
