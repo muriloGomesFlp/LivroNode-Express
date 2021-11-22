@@ -1,0 +1,14 @@
+Observação sobre o comando:
+    $ npm install --save-dev "módulo"
+    O --save-dev informa ao npm que é uma dependencia de desenvolvimento e não é essencial para a funcionamento da aplicação
+
+# configurar o test:
+    - adicionar no arquivo package.json:
+        "scripts":{
+            "test": "jest"
+        }
+    *OBS: 
+        - pode ser configurado outros scripts, contudo para usar, deve-se utilizar o comando -> $npm run "nome do script".
+        - o uso do run não é necessário no test, pois é um script muito comum, sendo este abstraido.
+    - executar o teste usar comando:
+        $npm test
