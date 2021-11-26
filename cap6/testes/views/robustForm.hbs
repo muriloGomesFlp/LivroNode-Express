@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs|sm|md|lg|xl-1-12">
+            <div class="card-body text-center ">
+                <div class="card-header">
+                    <h1>Robust Form</h1>
+                </div>
+                <div class="card-body">
+                    <form action="/sendRobustForm" method="post">
+                        <div>
+                            <label>Seu Nome:
+                                <input name="name" class="form-control" />
+                            </label>
+                        </div>
+                        <br />
+                        <div>
+                            <label>Seu email:
+                                <input name="email" class="form-control" type="email" />
+                            </label>
+                        </div>
+                        <br />
+                        <div>
+                            <label>Simular error:
+                                <input type="checkbox" class="form-check-input" name="simulateError" />
+                            </label>
+                        </div>
+                        <br />
+                        <div>
+                            <label>Usar Ajax?:
+                                <input type="checkbox" class="form-check-input" name="useAjax" />
+                            </label>
+                        </div>
+                        <br />
+                        <div>
+                            <button class="btn btn-primary" type="submit">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    // pequeno objeto utilitário para chamar nossa API
+    const api = {
+        post(path, data) {
+            const body = typeof data === 'object' ? JSON.stringify(data) : data
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }
+            return fetch(path, { method: "POST", body, headers })
+                .then(res => {
+                    if (res.status < 200 || res.status >= 400)
+                        return Promise.reject(new Error(`API error: ${res.status}`))
+                    return res.json()
+                })
+        }
+    }
+    // interceptar o envio do formulário
+    document.querySelector('form').addEventListener('submit', evt => {
+        const formdata = new FormData(evt.target)
+        console.log(!formdata.get('useAjax'))
+        if (!formdata.get('useAjax')) return   //se não estiver usando ajax, prossiga com o envio normal do formulário
+        // abortar o envio do formulário normal e usar ajax
+        evt.preventDefault()
+        const data = {
+            name: formdata.get('name'),
+            email: formdata.get('email'),
+            simulateError: formdata.get('simulateError'),
+        }
+        /*
+        estamos apenas redirecionando para as páginas de "obrigado" e "erro" existentes, 
+        mas em um aplicativo real, provavelmente alteraríamos dinamicamente o DOM para 
+        indicar sucesso ou falha
+        */
+        api.post('/sendRobustForm', data)
+            .then(() => window.location = '/reciveBasicForm?title=Robust%20Form%2C%20use%20Try%20and%20Catch%20-%20Results%20by%20Ajax%20Mode&nome=' + data.name + '&email=' + data.email + '')
+            .catch(() => window.location = '/errorForm')
+    })
+</script>
