@@ -12,3 +12,10 @@ Observação sobre o comando:
         - o uso do run não é necessário no test, pois é um script muito comum, sendo este abstraido.
     - executar o teste usar comando:
         $npm test
+
+-------
+O handlebars permite criar tamplates por meio do uso do {{variavel}} ou {{{<p>variavel</p>}}}. Esse movimento
+de envio de variáveis para a reinderizar o front-end é denomidado de contexto de objetos
+
+------
+PARTIALS: são componente que podem ser reutilizados em diferents páginas (estes não reiderizam uma view ou página inteira)
