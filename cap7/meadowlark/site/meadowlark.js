@@ -30,7 +30,7 @@ app.set('view cache', true)
 //static files
 app.use(express.static(__dirname + '/public'))
 
-//importando modulo de clima (./lib/midlleware/weather.js)
+//importando modulo de clima (./lib/midlleware/weather.js), origem dos dados de clima, ainda estaticos
 app.use(weatherMiddleware)
 
 //rotas das páginas 

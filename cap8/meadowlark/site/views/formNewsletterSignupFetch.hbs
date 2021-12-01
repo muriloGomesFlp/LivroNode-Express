@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs|sm|md|lg|xl-1-12">
+            <div class="card-body text-center ">
+                <div class="card-header">
+                    <h1>Subscribe News Letter</h1>
+                </div>
+                <div class="card-body">
+                    <div id="newsletterSignupFormContainer">
+                        <form role="form" class="form-horizontal" id="newsletterSignupForm">
+                            <input type="hidden" name="_csrf" value="{{csrf}}">
+                            <div class="form-group row">
+                                <label for="fieldName" class="control-label col-sm-4">Seu Nome:</label>
+                                <div class="col-sm-6">
+                                    <input id="fieldName" name="name" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group row">
+                                <label for="fieldEmail" class="control-label col-sm-4">Seu Email:</label>
+                                <div class="col-sm-6">
+                                    <input id="fieldEmail" name="email" type="email" required class="form-control" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-">
+                                    <button class="btn btn-primary" type="submit">Enviar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{#section 'scripts'}}
+<script src="/js/sendForm.js"></script>
+{{/section}}

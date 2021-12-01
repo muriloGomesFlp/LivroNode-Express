@@ -1,0 +1,42 @@
+<div class="card-body text-center">
+    <div class="card-header">
+        <h1>Using Blocks - cap7. pg107</h1>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            {{! #each => Percorre um array, desta forma permite a mudança do contexto }}
+            {{#each tours}} 
+            {{! Aqui o contexto irá mudar conforme o each vai passando pelo contexto enviado}}
+            <li class="list-group-item">
+                {{name}}: {{price}}
+                {{! o "../" permite acessar o objeto currencies, senoo este o contexto pai}}
+                {{#if ../currencies}}
+                {{! acessando a propriedade "abbrev" do objeto currency}}
+                ({{../currency.abbrev}})
+                {{/if}}
+            </li>
+            {{/each}}
+        </ul>
+        <br>
+        {{! O "unless" é semelhante ao if, contudo só será executado se o argumento for falso}}
+        {{#unless currencies}}
+        <p>All Prices in {{currency.name}}</p>
+        {{/unless}}
+        {{#if specialsUrl}}
+        {{! Novo bloco, mas o contexto é o mesmo}}
+        <p>Check out our <a href="{{specialsUrl}}">Specials!</a></p>
+        {{else}}
+        <p>Please check back often for specials.</p>
+        {{/if}}
+        <p>
+            {{#each currencies}}
+            {{! O uso do "." reference o contexto atual, neste caso o contexto atual é uma string de um array}}
+            <a href="#">{{.}}</a>
+            {{! o #each também pode possuir um else, desta forma se o array estiver vazio ele executa o bloco seguinte}}
+            {{else}}
+            Unfortunately, we currently only accept {{currency.name}}
+            {{/each}}
+        </p>
+
+    </div>
+</div>
