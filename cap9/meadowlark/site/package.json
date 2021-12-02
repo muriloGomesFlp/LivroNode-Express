@@ -1,0 +1,27 @@
+{
+  "name": "site_meadwlark",
+  "version": "1.0.0",
+  "description": "livro cap 9",
+  "main": "meadowlark.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint meadowlark.js lib"
+  },
+  "author": "Murilo S. Gomes",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parse": "^0.4.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^6.0.1",
+    "express-session": "^1.17.2",
+    "multiparty": "^4.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "jest": "^27.3.1",
+    "portfinder": "^1.0.28",
+    "puppeteer": "^11.0.0"
+  }
+}

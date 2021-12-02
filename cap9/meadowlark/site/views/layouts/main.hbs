@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <title>Meadlowlark Travel</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    {{{_sections.head}}}
+</head>
+<header
+    style="background-image: url('https://ae01.alicdn.com/kf/HTB1oDMKm29TBuNjy0Fcq6zeiFXa1/7x5ft-em-torno-do-mundo-plano-de-viagem-mapa-pir-mide-torre-eiffel-taj-mahal-personalizado.jpg'); background-position-y: center; background-size: cover;">
+    <img src="/img/logo.png" alt="Meadowlark Travel Logo">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav" style="margin-left: 2em;">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-test-id="about" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blocks">Blocks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sections">Sections</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/formNewsletter">Form Newsletter</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+{{! definindo o html do flash para atender a qualquer página}}
+{{#if flash}}
+<div class="alert alert-{{flash.type}} alert-dismissible">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>{{flash.intro}}</strong> {{{flash.message}}}
+</div>
+{{/if}}
+
+<body style="background-color: lightblue;">
+    <div style="display: flex; justify-content: center; margin-top: 2em;">
+        <div class="card" style="width: 80%;">
+
+            {{{body}}}
+
+        </div>
+    </div>
+
+</body>
+<script src="/js/bootstrap.min.js"></script>
+{{{_sections.scripts}}}
+
+</html>
