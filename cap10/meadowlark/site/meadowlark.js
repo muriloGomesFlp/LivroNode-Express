@@ -4,21 +4,19 @@ const app = express()
 const rotas = require('./lib/rotas')
 const weatherMiddleware = require('./lib/middleware/weather')
 const bodyParser = require('body-parser')
-//importar modulo credentials especidicado no arquivo .config.js
 const { credentials } = require('./config')
-//adicionando o middleware cookie-parse
 const cookieParse = require('cookie-parser')
-//instanciando o modulo express-session
 const expressSession = require('express-session')
-//instanciando o middleware criado para o flash
 const flashMiddleware = require('./lib/middleware/flash')
 
-require('dotenv').config({
-    path: ".env"
-})
+require('dotenv').config()
+
 app.disable('x-powered-by')
 
 const port = process.env.PORT
+
+const cartValidation = require('./lib/middleware/cartValidation')
+
 let hbs = expressHandlebars.create({
     defaultLayout: 'main',
     extname: '.hbs',
@@ -35,13 +33,15 @@ app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 
 app.set('view cache', true)
+
 app.use(express.static(__dirname + '/public'))
+
 app.use(weatherMiddleware)
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-//usando o cookie-parser e a credential configurada - inserindo o middleware
+
 app.use(cookieParse(credentials.cookieScret))
-//habilitando e configurando o expressSession (detalhes cap9 pg 140) - inserindo o middleware
 app.use(expressSession({
     resave: false,
     saveUninitialized: false,
@@ -50,17 +50,21 @@ app.use(expressSession({
 //habilitando o flash no app
 app.use(flashMiddleware)
 
+
+app.use(cartValidation.resetValidation)
+app.use(cartValidation.checkWaivers)
+app.use(cartValidation.checkGuestCounts)
+
+
 app.get('/', rotas.home)
 app.get('/about', rotas.about)
-app.get('/blocks', rotas.blocks)
-app.get('/sections', rotas.sections)
-app.get('/formNewsletter', rotas.formNewsletterSigup)
-app.post('/formNewsletter/process', rotas.formNewsletterSigupProcess)
-app.get('/formNewsletter/thanks', rotas.newsletterSignupThanks)
+app.get('/cart', rotas.cart)
+app.post('/addCart', rotas.addCart)
+app.get('/clearCart', rotas.clearCart)
 
-//middleware, manipulador generico
 app.use(rotas.notFound)
 app.use(rotas.serverErro)
+
 if (require.main == module) {
     app.listen(port, () => console.log(
         `Express started on http://localhost:${port};

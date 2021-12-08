@@ -20,3 +20,8 @@ de envio de variáveis para a reinderizar o front-end é denomidado de contexto 
 ------
 PARTIALS: são componente que podem ser reutilizados em diferents páginas (estes não reiderizam uma view ou página inteira)
 Utilizado para inserir componentes em páginas especificas, podendo levar diferentes contextos
+
+------
+MIDDLEWARE: Conceitualmente é uma maneira de encapsular funcionalidades, sendo que estas operam em uma requisição
+HTTP feita para a aplicação. Na prática é uma funcionção que recebe três parametros (obj. requisição, obj. resposta e func. next)
+O MIDDLEWARE é executado no pipeline.
