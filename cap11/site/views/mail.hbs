@@ -1,0 +1,34 @@
+<div class="card-body">
+    <div class="card-header  text-center">
+        <h1>SendMail - Test with Sendgrid + NodeMailer</h1>
+    </div>
+    <div class="card-body">
+        <div class="container" id="containerSendMail">
+            <form action="/sendMail" method="POST" id="formSendMail">
+                <input type="hidden" name="_csrf" value="{{csrf}}">
+                <div class="group-form">
+                    <label>From</label>
+                    <input type="email" name="emailFrom" disabled placeholder="contato@gcf.app.br" class="form-control">
+                </div>
+                <div class="group-form">
+                    <label>To</label>
+                    <input type="email" name="emailTo" class="form-control">
+                </div>
+                <div class="group-form">
+                    <label>Subject</label>
+                    <input type="text" name="emailSubject" class="form-control">
+                </div>
+                <div class="group-form">
+                    <label>Text</label>
+                    <textarea class="form-control" name="emailText" style="width: 100%; height: 300px;"></textarea>
+                </div>
+                <br>
+                <div class="text-center"><button type="submit" class="btn btn-success">Send</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{#section 'scripts'}}
+<script src="/js/sendMail.js"></script>
+{{/section}}
