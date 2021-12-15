@@ -3,6 +3,7 @@
 const nodemailer = require('nodemailer')
 const htmlToFormattedText = require('html2plaintext')
 
+
 module.exports = credentials => {
 
     const mailTransport = nodemailer.createTransport({
